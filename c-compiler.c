@@ -6,9 +6,10 @@
 
 enum {FIM = -1, ID = 0, NUM = 1, OP, COMP, ERRO, DELIMITADOR};
 
-int linhas;
+int linhas = 1;
 int indexBufferEntrada = 0;
 int indexBufferSaida = 0;
+int fimBufferEntrada = 0;
 char bufferEntrada[tamMax];
 char bufferSaida[tamMax];
 FILE * arquivo;
@@ -75,18 +76,29 @@ int mapeamento(int caracter){
 
 int getInput(){
     char temp;
-    for (int i = 0; i < tamMax; i++)
-    {
+    fimBufferEntrada = 0;
+    while (fimBufferEntrada < tamMax && temp != '\n')
+    {    
         temp = fgetc(arquivo);
+        fimBufferEntrada++;
         if (temp != EOF)
         {
-            bufferEntrada[i] = temp;
+            bufferEntrada[fimBufferEntrada] = temp;
         }
         else{
-            bufferEntrada[i] = temp;
+            bufferEntrada[fimBufferEntrada] = temp;
             return -1;
         }
-        
+    }
+    if (fimBufferEntrada == tamMax - 1)
+    {
+        if (bufferEntrada[fimBufferEntrada] == '\n')
+        {
+            linhas++;
+        }
+    }
+    else{
+        linhas++;
     }
     return 0;
 }
@@ -97,11 +109,9 @@ token myGetToken(){
     token aux;
     while ((estadoAtual < 9))
     {
-        if (indexBufferEntrada <= 200)
+        if (indexBufferEntrada <= fimBufferEntrada)
         {
             temp = mapeamento(bufferEntrada[indexBufferEntrada]);
-            if (bufferEntrada[indexBufferEntrada] == 10)
-                linhas++;
             estadoAtual = tabelaTransicao[estadoAtual][temp];
             if ((estadoAtual!=5) && (estadoAtual != 4) && (estadoAtual != 0))
             {
@@ -226,8 +236,8 @@ int main(int argc, char ** argv){
     
     token next;
     int aux = 0;
-    arquivo = fopen("programa.txt", "r");
-    escrita = fopen("tokens.txt", "w");
+    arquivo = fopen("programa.c", "r");
+    //escrita = fopen("tokens.txt", "w");
 
     next.type = 0;
 
@@ -331,9 +341,9 @@ int main(int argc, char ** argv){
     tabelaTransicao[7][6] = 14;
     tabelaTransicao[7][7] = 14;
     tabelaTransicao[7][8] = 14;
-    tabelaTransicao[7][9] = 7;
-    tabelaTransicao[7][10] = 14;
-    tabelaTransicao[7][11] = 14;
+    tabelaTransicao[7][9] = 9;
+    tabelaTransicao[7][10] = 9;
+    tabelaTransicao[7][11] = 9;
     
     tabelaTransicao[8][0] = 9;
     tabelaTransicao[8][1] = 9;
@@ -355,7 +365,7 @@ int main(int argc, char ** argv){
     {
         next = myGetToken();
     }
-    
+    printf("%d\n", linhas);
     printf("%d\n", EOF);
     return 0;
 }
