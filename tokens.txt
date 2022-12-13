@@ -1,0 +1,47 @@
+
+
+<int, int> <ID, x><LBRACKET, [><Num, 10><RBRACKET, ]><SEMICOLON, ;>
+
+<int, int> <ID, minloc> <LPAREN, (> <int, int> <ID, a><LBRACKET, [><RBRACKET, ]><COMMA, ,> <int, int> <ID, low><COMMA, ,> <int, int> <ID, high> <RPAREN, )> <LBRACE, {> 
+    <int, int> <ID, i><SEMICOLON, ;> 
+    <int, int> <ID, x><SEMICOLON, ;> 
+    <int, int> <ID, k><SEMICOLON, ;> 
+    <ID, k> <IGUAL, => <ID, low><SEMICOLON, ;> 
+    <ID, x> <IGUAL, => <ID, a><LBRACKET, [><ID, low><RBRACKET, ]><SEMICOLON, ;> 
+    <ID, i> <IGUAL, => <ID, low> <SOMA, +> <Num, 1><SEMICOLON, ;> 
+    <while, while> <LPAREN, (><ID, i> <Relacional, < ><ID, high><RPAREN, )> <LBRACE, {> 
+        <if, if> <LPAREN, (><ID, a><LBRACKET, [><ID, i><RBRACKET, ]> <Relacional, < ><ID, x><RPAREN, )> <LBRACE, {> 
+            <ID, x> <IGUAL, => <ID, a><LBRACKET, [><ID, i><RBRACKET, ]><SEMICOLON, ;> 
+            <ID, k> <IGUAL, => <ID, i><SEMICOLON, ;> 
+        <RBRACE, }> 
+        <ID, i> <IGUAL, => <ID, i> <SOMA, +> <Num, 1><SEMICOLON, ;>
+    <RBRACE, }>
+    <return, return> <ID, k><SEMICOLON, ;> 
+<RBRACE, }>
+
+<void, void> <ID, sort><LPAREN, (> <int, int> <ID, a><LBRACKET, [><RBRACKET, ]><COMMA, ,> <int, int> <ID, low><COMMA, ,> <int, int> <ID, high><RPAREN, )> <LBRACE, {>
+    <int, int> <ID, i><SEMICOLON, ;> 
+    <int, int> <ID, k><SEMICOLON, ;> 
+    <ID, i> <IGUAL, => <ID, low><SEMICOLON, ;>
+    <while, while> <LPAREN, (><ID, i> <Relacional, < ><ID, high><SOMA, -><Num, 1><RPAREN, )> <LBRACE, {> 
+        <int, int> <ID, t><SEMICOLON, ;>
+        <ID, k> <IGUAL, => <ID, minloc><LPAREN, (><ID, a><COMMA, ,><ID, i><COMMA, ,><ID, high><RPAREN, )><SEMICOLON, ;> 
+        <ID, t> <IGUAL, => <ID, a><LBRACKET, [><ID, k><RBRACKET, ]><SEMICOLON, ;> 
+        <ID, a><LBRACKET, [><ID, k><RBRACKET, ]> <IGUAL, => <ID, a><LBRACKET, [><ID, i><RBRACKET, ]><SEMICOLON, ;> 
+        <ID, a><LBRACKET, [><ID, i><RBRACKET, ]> <IGUAL, => <ID, t><SEMICOLON, ;> 
+        <ID, i> <IGUAL, => <ID, i> <SOMA, +> <Num, 1><SEMICOLON, ;>
+    <RBRACE, }>
+<RBRACE, }>
+<void, void> <ID, main><LPAREN, (><void, void><RPAREN, )> <LBRACE, {>
+    <int, int> <ID, i><SEMICOLON, ;> <ID, i> <IGUAL, => <Num, 0><SEMICOLON, ;>
+    <while, while> <LPAREN, (><ID, i> <Relacional, < ><Num, 10><RPAREN, )> <LBRACE, {> 
+        <ID, x><LBRACKET, [><ID, i><RBRACKET, ]> <IGUAL, => <ID, input><LPAREN, (><RPAREN, )><SEMICOLON, ;> 
+        <ID, i> <IGUAL, => <ID, i> <SOMA, +> <Num, 1><SEMICOLON, ;> 
+    <RBRACE, }>
+    <ID, sort><LPAREN, (><ID, x><COMMA, ,><Num, 0><COMMA, ,><Num, 10><RPAREN, )><SEMICOLON, ;> 
+    <ID, i> <IGUAL, => <Num, 0><SEMICOLON, ;>
+    <while, while> <LPAREN, (><ID, i> <Relacional, < ><Num, 10><RPAREN, )> <LBRACE, {> 
+        <ID, output><LPAREN, (><ID, x><LBRACKET, [><ID, i><RBRACKET, ]><RPAREN, )><SEMICOLON, ;> 
+        <ID, i> <IGUAL, => <ID, i> <SOMA, +> <Num, 1><SEMICOLON, ;>
+    <RBRACE, }>
+<RBRACE, }><Fim>
